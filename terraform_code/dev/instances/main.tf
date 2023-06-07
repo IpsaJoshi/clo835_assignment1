@@ -73,7 +73,7 @@ resource "aws_key_pair" "my_key" {
 
 # Security Group
 resource "aws_security_group" "my_sg" {
-  name        = "allow_ssh_"
+  name        = "_allow_ssh_"
   description = "Allow SSH inbound traffic"
   vpc_id      = data.aws_vpc.default.id
 
@@ -139,9 +139,9 @@ resource "aws_eip" "static_eip" {
 
 
 resource "aws_ecr_repository" "webapp_repo" {
-  name = "webapp"
+  name = "ijoshi_webapp"
 }
 
 resource "aws_ecr_repository" "mysql_repo" {
-  name = "mysql"
+  name = "ijoshi_mysql"
 }
