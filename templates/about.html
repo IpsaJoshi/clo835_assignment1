@@ -1,6 +1,11 @@
 <!doctype html>
 <title>Hello from Flask</title>
-<body style="background: {{ color }};"></body>
+<style>
+        body {
+            background-image: url("{{ background_image_url }}");
+            background-size: cover;
+        }
+</style>
 <div style="color: #e4e4e4;
     text-align:  center;
     height: 90px;
