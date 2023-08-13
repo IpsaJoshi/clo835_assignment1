@@ -32,7 +32,7 @@ table = 'employee';
 bucket_name = "bg-images-grp14"
 default_img = "img1.jpeg"
 
-def download_file(file_name, bucket):
+def download_file(file_name=default_img, bucket=bucket_name):
     """
     Function to download a given file from an S3 bucket
     """
@@ -115,5 +115,5 @@ def FetchData():
                            lname=output["last_name"], interest=output["primary_skills"], location=output["location"], background_image_url= background_image_url)
 
 if __name__ == '__main__':  
-    background_image_url = download(DBIMG,DBBKT)
+    background_image_url = download_file(default_img,bucket_name)
     app.run(host='0.0.0.0',port=81,debug=True)
