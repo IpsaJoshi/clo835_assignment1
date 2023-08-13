@@ -14,6 +14,8 @@ DBPWD = os.environ.get("DBPWD") or "passwors"
 DATABASE = os.environ.get("DATABASE") or "employees"
 DBPORT = int(os.environ.get("DBPORT"))
 DBIMG = os.environ.get("DBIMG") or "img1.jpeg"
+DBBKT = os.environ.get("DBBKT") or "bg-images-grp14"
+
 
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
@@ -43,7 +45,7 @@ def download_file(file_name = default_img, bucket = bucket_name):
 @app.route("/download/<filename>", methods=['GET'])
 def download(filename):
     if request.method == 'GET':
-        output = download_file(filename, BUCKET)
+        output = download_file(filename, DBBKT)
 
         return send_file(output, as_attachment=True)
 
@@ -113,5 +115,5 @@ def FetchData():
                            lname=output["last_name"], interest=output["primary_skills"], location=output["location"], background_image_url= background_image_url)
 
 if __name__ == '__main__':  
-    background_image_url = download_file(bucket_name, default_img)
+    background_image_url = download(DBIMG)
     app.run(host='0.0.0.0',port=81,debug=True)
