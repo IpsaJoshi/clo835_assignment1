@@ -12,7 +12,7 @@ DBUSER = os.environ.get("DBUSER") or "root"
 DBPWD = os.environ.get("DBPWD") or "passwors"
 DATABASE = os.environ.get("DATABASE") or "employees"
 DBPORT = int(os.environ.get("DBPORT"))
-background_image_url = os.environ.get("background_image_url") or "https://bg-images-grp14.s3.amazonaws.com/img1.jpeg"
+DBIMG = os.environ.get("DBIMG") or "https://bg-images-grp14.s3.amazonaws.com/img1.jpeg"
 
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
@@ -26,7 +26,10 @@ db_conn = connections.Connection(
 output = {}
 table = 'employee';
 
-def download_file(file_name, bucket):
+bucket_name = "bg-images-grp14"
+default_img = "img1.jpeg"
+
+def download_file(file_name = default_img, bucket = bucket_name):
     """
     Function to download a given file from an S3 bucket
     """
@@ -109,5 +112,6 @@ def FetchData():
     return render_template("getempoutput.html", id=output["emp_id"], fname=output["first_name"],
                            lname=output["last_name"], interest=output["primary_skills"], location=output["location"], background_image_url= "https://bg-images-grp14.s3.amazonaws.com/img1.jpeg")
 
-if __name__ == '__main__':    
+if __name__ == '__main__':  
+    background_image_url = download_file(bucket_name, default_img)
     app.run(host='0.0.0.0',port=8080,debug=True)
