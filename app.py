@@ -51,11 +51,11 @@ def download(filename, bucket):
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('addemp.html', background_image_url=background_image_url)
+    return render_template('addemp.html', background_image_url="https://bg-images-grp14.s3.amazonaws.com/img1.jpeg")
 
 @app.route("/about", methods=['GET','POST'])
 def about():
-    return render_template('about.html', background_image_url=background_image_url)
+    return render_template('about.html', background_image_url="https://bg-images-grp14.s3.amazonaws.com/img1.jpeg")
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
@@ -79,7 +79,7 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('addempoutput.html', name=emp_name, background_image_url=background_image_url)
+    return render_template('addempoutput.html', name=emp_name, background_image_url="https://bg-images-grp14.s3.amazonaws.com/img1.jpeg")
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def GetEmp():
