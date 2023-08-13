@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 from pymysql import connections
 import os
 import random
@@ -51,11 +51,11 @@ def download(filename, bucket):
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('addemp.html', background_image_url= background_image_url)
+    return render_template('addemp.html', background_image_url=background_image_url)
 
 @app.route("/about", methods=['GET','POST'])
 def about():
-    return render_template('about.html', background_image_url= background_image_url)
+    return render_template('about.html', background_image_url=background_image_url)
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
