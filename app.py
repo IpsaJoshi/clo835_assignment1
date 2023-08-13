@@ -3,6 +3,7 @@ from pymysql import connections
 import os
 import random
 import argparse
+import boto3
 
 
 app = Flask(__name__)
@@ -12,7 +13,7 @@ DBUSER = os.environ.get("DBUSER") or "root"
 DBPWD = os.environ.get("DBPWD") or "passwors"
 DATABASE = os.environ.get("DATABASE") or "employees"
 DBPORT = int(os.environ.get("DBPORT"))
-DBIMG = os.environ.get("DBIMG") or "https://bg-images-grp14.s3.amazonaws.com/img1.jpeg"
+DBIMG = os.environ.get("DBIMG") or "img1.jpeg"
 
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
@@ -39,14 +40,6 @@ def download_file(file_name = default_img, bucket = bucket_name):
 
     return output
 
-@app.route("/", methods=['GET', 'POST'])
-def home():
-    return render_template('addemp.html', background_image_url= "https://bg-images-grp14.s3.amazonaws.com/img1.jpeg")
-
-@app.route("/about", methods=['GET','POST'])
-def about():
-    return render_template('about.html', background_image_url= "https://bg-images-grp14.s3.amazonaws.com/img1.jpeg")
-
 @app.route("/download/<filename>", methods=['GET'])
 def download(filename):
     if request.method == 'GET':
@@ -54,6 +47,13 @@ def download(filename):
 
         return send_file(output, as_attachment=True)
 
+@app.route("/", methods=['GET', 'POST'])
+def home():
+    return render_template('addemp.html', background_image_url= background_image_url)
+
+@app.route("/about", methods=['GET','POST'])
+def about():
+    return render_template('about.html', background_image_url= background_image_url)
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
@@ -77,11 +77,11 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('addempoutput.html', name=emp_name, background_image_url= "https://bg-images-grp14.s3.amazonaws.com/img1.jpeg")
+    return render_template('addempoutput.html', name=emp_name, background_image_url= background_image_url)
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def GetEmp():
-    return render_template("getemp.html", background_image_url= "https://bg-images-grp14.s3.amazonaws.com/img1.jpeg")
+    return render_template("getemp.html", background_image_url= background_image_url)
 
 
 @app.route("/fetchdata", methods=['GET','POST'])
@@ -110,7 +110,7 @@ def FetchData():
         cursor.close()
 
     return render_template("getempoutput.html", id=output["emp_id"], fname=output["first_name"],
-                           lname=output["last_name"], interest=output["primary_skills"], location=output["location"], background_image_url= "https://bg-images-grp14.s3.amazonaws.com/img1.jpeg")
+                           lname=output["last_name"], interest=output["primary_skills"], location=output["location"], background_image_url= background_image_url)
 
 if __name__ == '__main__':  
     background_image_url = download_file(bucket_name, default_img)
