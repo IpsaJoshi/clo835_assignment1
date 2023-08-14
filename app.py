@@ -3,7 +3,7 @@ from pymysql import connections
 import os
 import random
 import argparse
-import boto3
+
 
 
 app = Flask(__name__)
