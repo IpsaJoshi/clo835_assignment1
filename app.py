@@ -79,7 +79,7 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('addempoutput.html', name=emp_name)
+    return render_template('addempoutput.html', name=emp_name, background_image_url=DBIMG)
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def GetEmp():
