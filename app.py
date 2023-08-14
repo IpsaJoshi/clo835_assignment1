@@ -32,7 +32,7 @@ bucket_name = "bg-images-grp14"
 BUCKET = "bg-images-grp14"
 default_img = "img1.jpeg"
 
-def download_file(file_name = default_img, bucket = bucket_name = "bg-images-grp14"):
+def download_file(file_name, bucket):
     """
     Function to download a given file from an S3 bucket
     """
