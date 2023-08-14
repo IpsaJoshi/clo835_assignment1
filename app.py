@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 from pymysql import connections
 import os
 import random
@@ -14,7 +14,7 @@ DBPWD = os.environ.get("DBPWD") or "passwors"
 DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
 DBPORT = int(os.environ.get("DBPORT"))
-DBIMG = os.environ.get("DBIMG") or "https://bg-images-grp14.s3.amazonaws.com/img1.jpeg"
+DBIMG = os.environ.get("DBIMG") or "https://http://52.91.25.239:81/bg-images-grp14.s3.amazonaws.com/img1.jpeg"
 
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
@@ -79,7 +79,7 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('addempoutput.html', name=emp_name)
+    return render_template('addempoutput.html', name=emp_name, background_image_url=DBIMG)
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def GetEmp():
