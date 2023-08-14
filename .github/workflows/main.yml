@@ -30,7 +30,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: grp14_db
-        IMAGE_TAG: v0.2
+        IMAGE_TAG: v0.3
       run: |
         # Docker build
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile_mysql .
@@ -39,7 +39,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: grp14_webapp
-        IMAGE_TAG: v0.2
+        IMAGE_TAG: v0.3
       run: |
         # Docker build
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
