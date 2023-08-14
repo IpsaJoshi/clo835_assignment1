@@ -14,7 +14,7 @@ DBPWD = os.environ.get("DBPWD") or "passwors"
 DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
 DBPORT = int(os.environ.get("DBPORT"))
-
+DBIMG = os.environ.get("DBIMG") or "https://bg-images-grp14.s3.amazonaws.com/img1.jpeg"
 
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
@@ -27,6 +27,27 @@ db_conn = connections.Connection(
 )
 output = {}
 table = 'employee';
+
+bucket_name = "bg-images-grp14"
+BUCKET = "bg-images-grp14"
+default_img = "img1.jpeg"
+
+def download_file(file_name = default_img, bucket = bucket_name = "bg-images-grp14"):
+    """
+    Function to download a given file from an S3 bucket
+    """
+    s3 = boto3.resource('s3')
+    output = f"downloads/{file_name}"
+    s3.Bucket(bucket).download_file(file_name, output)
+
+    return output
+
+@app.route("/download/<filename>", methods=['GET'])
+def download(filename):
+    if request.method == 'GET':
+        output = download_file(filename, BUCKET)
+
+        return send_file(output, as_attachment=True)
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
