@@ -14,7 +14,7 @@ DBPWD = os.environ.get("DBPWD") or "passwors"
 DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
 DBPORT = int(os.environ.get("DBPORT"))
-DBIMG = os.environ.get("DBIMG") or "https://http://52.91.25.239:81/bg-images-grp14.s3.amazonaws.com/img1.jpeg"
+DBIMG = os.environ.get("DBIMG") or "https://http://download/img1.jpeg"
 
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
@@ -37,7 +37,7 @@ def download_file(file_name = default_img, bucket = bucket_name = "bg-images-grp
     Function to download a given file from an S3 bucket
     """
     s3 = boto3.resource('s3')
-    output = f"downloads/{file_name}"
+    output = f"download/{file_name}"
     s3.Bucket(bucket).download_file(file_name, output)
 
     return output
