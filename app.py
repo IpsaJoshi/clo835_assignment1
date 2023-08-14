@@ -37,7 +37,7 @@ def download_file(file_name = default_img, bucket = bucket_name = "bg-images-grp
     Function to download a given file from an S3 bucket
     """
     s3 = boto3.resource('s3')
-    output = f"download/{file_name}"
+    output = f"{file_name}"
     s3.Bucket(bucket).download_file(file_name, output)
 
     return output
