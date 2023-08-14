@@ -51,11 +51,11 @@ def download(filename):
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('addemp.html', background_image_url=DBIMG)
+    return render_template('addemp.html', background_image_url=[DBIMG])
 
 @app.route("/about", methods=['GET','POST'])
 def about():
-    return render_template('about.html', background_image_url=DBIMG)
+    return render_template('about.html', background_image_url=[DBIMG])
     
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
@@ -79,7 +79,7 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('addempoutput.html', name=emp_name, background_image_url=DBIMG)
+    return render_template('addempoutput.html', name=emp_name, background_image_url=[DBIMG])
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def GetEmp():
@@ -112,7 +112,7 @@ def FetchData():
         cursor.close()
 
     return render_template("getempoutput.html", id=output["emp_id"], fname=output["first_name"],
-                           lname=output["last_name"], interest=output["primary_skills"], location=output["location"], background_image_url=DBIMG)
+                           lname=output["last_name"], interest=output["primary_skills"], location=output["location"], background_image_url=[DBIMG])
 
 if __name__ == '__main__':
 
