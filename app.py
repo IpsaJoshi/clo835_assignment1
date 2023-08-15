@@ -84,7 +84,7 @@ def AddEmp():
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def GetEmp():
-    return render_template("getemp.html")
+    return render_template("getemp.html",  name=emp_name, background_image_url=[DBIMG], your_name = DBNAME)
 
 
 @app.route("/fetchdata", methods=['GET','POST'])
