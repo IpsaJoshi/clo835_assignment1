@@ -15,6 +15,7 @@ DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
 DBPORT = int(os.environ.get("DBPORT"))
 DBIMG = os.environ.get("DBIMG") or "http://44.211.65.175:81/download/img1.jpeg"
+DBNAME = os.environ.get('DBNAME') or "Grp 14"
 
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
@@ -51,11 +52,11 @@ def download(filename):
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('addemp.html', background_image_url=[DBIMG])
+    return render_template('addemp.html', background_image_url=[DBIMG], your_name = DBNAME)
 
 @app.route("/about", methods=['GET','POST'])
 def about():
-    return render_template('about.html', background_image_url=[DBIMG])
+    return render_template('about.html', background_image_url=[DBIMG], your_name = DBNAME)
     
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
@@ -79,7 +80,7 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('addempoutput.html', name=emp_name, background_image_url=[DBIMG])
+    return render_template('addempoutput.html', name=emp_name, background_image_url=[DBIMG], your_name = DBNAME)
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def GetEmp():
@@ -112,7 +113,7 @@ def FetchData():
         cursor.close()
 
     return render_template("getempoutput.html", id=output["emp_id"], fname=output["first_name"],
-                           lname=output["last_name"], interest=output["primary_skills"], location=output["location"], background_image_url=[DBIMG])
+                           lname=output["last_name"], interest=output["primary_skills"], location=output["location"], background_image_url=[DBIMG], your_name = DBNAME)
 
 if __name__ == '__main__':
 
